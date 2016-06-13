@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1465786817 source:c:\users\iamseanwhite\dev\centerofmass\main.cpp
+	<iostream>
+	"object.h"
+
+1465786658 c:\users\iamseanwhite\dev\centerofmass\object.h
+
