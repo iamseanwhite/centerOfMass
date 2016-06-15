@@ -1,7 +1,12 @@
 # depslib dependency file v1.0
-1465786817 source:c:\users\iamseanwhite\dev\centerofmass\main.cpp
-	<iostream>
+1465967483 source:c:\users\iamseanwhite\dev\centerofmass\main.cpp
 	"object.h"
+	"object.cpp"
 
-1465786658 c:\users\iamseanwhite\dev\centerofmass\object.h
+1465966336 c:\users\iamseanwhite\dev\centerofmass\object.h
+	<iostream>
+	<string>
+
+1465967286 c:\users\iamseanwhite\dev\centerofmass\object.cpp
+	"object.h"
 

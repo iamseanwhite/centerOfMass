@@ -5,13 +5,26 @@
 #include <string>
 using namespace std;
 
-class Object {
-    public:
-    float mass = 0, radius = 0, xPosition = 0;
+struct celestialBody {
+    float mass, radius, xPosition;
     string name;
+    struct celestialBody* next;
+    struct celestialBody* prev;
 
 };
 
-Object* createObject(float mass, float radius, float xPosition, string name);
+struct solarSystem {
+    int numberOfBodies;
+    string name;
+    float totalMass;
+    float centerOfMass;
+    struct celestialBody* sentinel;
+};
+
+celestialBody* createCelestialBody(float mass, float radius, float xPosition, string name);
+void initializeSolarSystem(struct solarSystem* sS, string name);
+solarSystem* createSolarSystem(string name);
+void addBodyToSystem(struct celestialBody* cB, struct solarSystem* sS);
+void solarSystemPrint(struct solarSystem* sS);
 
 #endif

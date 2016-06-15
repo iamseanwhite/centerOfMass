@@ -4,32 +4,83 @@
 
 
 int main() {
-    cout << "Press 1 to create and place an object in your space!\n" <<endl;
+    int menuChoice;
+    solarSystem* currentSystem = new solarSystem;
+    currentSystem = NULL;
 
-    int userInput;
-    float mass, radius, xPosition;
-    string name;
+    while(true){
 
-    cin >> userInput;
+    cout << "What would you like to do?\n 1. Create a new Solar System\n 2. Add a new object to current System\n 3. View objects in current System\n" <<endl;
+    cin >> menuChoice;
 
-    if(userInput == 1) {
-        cout << "What is the name of your object? ";
-        cin >> name;
-        cout << "What is the radius of your object? ";
-        cin >> radius;
-        cout << "What is the mass of your object? ";
-        cin >> mass;
-        cout << "What is the x-position of your object? ";
-        cin >> xPosition;
+    switch (menuChoice){
+        case 1:
+        {
+            string solarSystemName;
+            cout << "\nSolar System name: ";
+            cin >> solarSystemName;
+            solarSystem* newSolarSystem = createSolarSystem(solarSystemName);
+            currentSystem = newSolarSystem;                                 //to hold the system the user is currently using
+
+            cout << "\nNew solar system created:\n\n";
+            cout << "Name: " << newSolarSystem->name << " \n";
+            cout << "Size: " << newSolarSystem->numberOfBodies << " bodies\n";
+            cout << "Total Mass: " << newSolarSystem->totalMass << " kg \n";
+            cout << "Center of Mass: " << newSolarSystem->centerOfMass << " meters \n\n";
+            break;
+        }
+
+        case 2:
+        {
+
+            if (currentSystem == NULL) {
+                cout << "\nYou don't have any solar systems!\n\n";
+                break;
+            }
+
+            float mass, radius, xPosition;
+            string name;
+
+            cout << "What is the name of your object? ";
+            cin >> name;
+            cout << "What is the radius of your object? ";
+            cin >> radius;
+            cout << "What is the mass of your object? ";
+            cin >> mass;
+            cout << "What is the x-position of your object? ";
+            cin >> xPosition;
 
 
-        Object *newObject = createObject(mass, radius, xPosition, name);
+            celestialBody *newCelestialBody = createCelestialBody(mass, radius, xPosition, name);
+            addBodyToSystem(newCelestialBody, currentSystem);
 
-        cout << "\nObject added: \n" << newObject->name;
-        cout << "\nRadius: " << newObject->radius << " meters\n";
-        cout << "Mass: " << newObject->mass << " kg\n";
-        cout << "x-position: " << newObject->xPosition << " meters\n";
+            cout << "\nObject added:\n\n" << newCelestialBody->name;
+            cout << "\nRadius: " << newCelestialBody->radius << " meters\n";
+            cout << "Mass: " << newCelestialBody->mass << " kg\n";
+            cout << "x-position: " << newCelestialBody->xPosition << " meters\n\n";
+            break;
+        }
+        case 3:
+            if (currentSystem == NULL) {
+                cout << "\nYou don't have any solar systems!\n\n";
+                break;
+            }
+            if (currentSystem->numberOfBodies == 0) {
+                cout << "\nYour system is empty!\n\n";
+                break;
+            }
+            solarSystemPrint(currentSystem);
+            break;
+
+        default:
+            cout << "\nNot a valid option!\n\n";
+            break;
+
+
 
     }
+
+    }
+
 
 }
