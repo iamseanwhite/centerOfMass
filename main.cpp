@@ -1,5 +1,6 @@
 #include "object.h"
 #include "object.cpp"
+#include <windows.h>
 
 
 
@@ -8,9 +9,12 @@ int main() {
     solarSystem* currentSystem = new solarSystem;
     currentSystem = NULL;
 
-    while(true){
+    listOfSystems *systemList = new listOfSystems;
+    initializeSystemList(systemList);
 
-    cout << "What would you like to do?\n 1. Create a new Solar System\n 2. Add a new object to current System\n 3. View objects in current System\n" <<endl;
+    while(true){
+    Sleep( 500 );
+    cout << "What would you like to do?\n 1. Create a new Solar System\n 2. Add a new object to current System\n 3. View objects in current System\n 4. Change current System\n" <<endl;
     cin >> menuChoice;
 
     switch (menuChoice){
@@ -19,7 +23,7 @@ int main() {
             string solarSystemName;
             cout << "\nSolar System name: ";
             cin >> solarSystemName;
-            solarSystem* newSolarSystem = createSolarSystem(solarSystemName);
+            solarSystem* newSolarSystem = createSolarSystem(systemList, solarSystemName);
             currentSystem = newSolarSystem;                                 //to hold the system the user is currently using
 
             cout << "\nNew solar system created:\n\n";
@@ -71,6 +75,9 @@ int main() {
             }
             solarSystemPrint(currentSystem);
             break;
+
+        case 4:
+
 
         default:
             cout << "\nNot a valid option!\n\n";
