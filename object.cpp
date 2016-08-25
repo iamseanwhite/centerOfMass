@@ -74,7 +74,8 @@ void solarSystemPrint(struct solarSystem* sS){
     celestialBody* temp = new celestialBody;
     temp = sS->sentinel->next;
 
-    cout << "System " << sS->name <<":\n\n";
+    cout << "\nSystem " << sS->name <<":\n\n";
+    cout << "Center of Mass: " << calculateCenterofMass(sS) <<" meters \n\n";
 
     while (temp != sS->sentinel){
         cout << "Name: " << temp->name;
@@ -83,4 +84,52 @@ void solarSystemPrint(struct solarSystem* sS){
         cout << "x-position: " << temp->xPosition << " meters\n\n";
         temp = temp->next;
     }
+}
+
+solarSystem* selectSystem(struct listOfSystems* lst){
+    string systemChoice;
+    solarSystem* temp = lst->sentinel->next;
+        for (int i = 0; i < lst->numberOfSystems; i++) {
+            cout << temp->name << endl;
+            temp = temp->next;
+        }
+    
+        
+    cout << "\n";
+   
+    while (true){    
+        cin >> systemChoice;
+        temp = temp->next;
+        
+        for (int i = 0; i < lst->numberOfSystems; i++) {
+            if (temp->name == systemChoice) 
+                return temp;
+                
+            temp = temp->next;
+            
+        }
+        
+        cout << "Not a valid System! Tray again: ";
+    }
+    
+}
+
+float calculateCenterofMass(struct solarSystem* sS){
+    float totalMoment = 0;
+    
+    if (sS->sentinel->next != sS->sentinel) {
+        celestialBody* temp = sS->sentinel->next;
+        
+        while (temp != sS->sentinel) {
+            totalMoment += temp->mass * temp->xPosition;
+            temp = temp->next;
+        }
+        
+        sS->centerOfMass = totalMoment / sS->totalMass;
+        return sS->centerOfMass;
+    }
+    
+    else cout << "There are no bodies in this system";
+    
+        
 }

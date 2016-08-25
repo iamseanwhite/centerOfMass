@@ -26,6 +26,8 @@ struct solarSystem {
 struct listOfSystems {
     int numberOfSystems;
     struct solarSystem* sentinel;
+    struct solarSystem* next;
+    struct solarSystem* prev;
 };
 
 celestialBody* createCelestialBody(float mass, float radius, float xPosition, string name);
@@ -35,5 +37,7 @@ void addBodyToSystem(struct celestialBody* cB, struct solarSystem* sS);
 void solarSystemPrint(struct solarSystem* sS);
 void addSystemToList(struct listOfSystems* lst, struct solarSystem* sS);
 void initializeSystemList(struct listOfSystems);
+solarSystem* selectSystem(struct listOfSystems* lst);
+float calculateCenterofMass(struct solarSystem* sS);
 
 #endif
