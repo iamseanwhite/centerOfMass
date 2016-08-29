@@ -4,7 +4,7 @@
 *.layout
 
 # Build results
-bin/Debug
+bin/Debug/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
